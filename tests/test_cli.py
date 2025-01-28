@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from click.testing import CliRunner
 
@@ -51,7 +53,16 @@ def test_run_watch(mocker, cancel_remaining_task):
     runner = CliRunner()
     result = runner.invoke(cli, ['tests.test_cli.WorkerSettings', '--watch', 'tests'])
     assert result.exit_code == 0
-    assert '1 files changes, reloading arq worker...'
+    assert 'files changed, reloading arq worker...' in result.output
+
+
+@pytest.mark.timeout(10)  # may take a while to get to the point we can test
+def test_multiple_workers():
+    runner = CliRunner()
+    result = runner.invoke(cli, ['tests.test_cli.WorkerSettings', '--workers', '4'])
+    while 'clients_connected=4' not in result.output:
+        time.sleep(1)
+    assert True
 
 
 custom_log_dict = {
