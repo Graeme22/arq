@@ -3,6 +3,18 @@
 History
 -------
 
+v0.28.0 (2026-04-16)
+....................
+
+* Add support for Python 3.14 by @Viicos in #522
+
+v0.27.0 (2026-01-30)
+....................
+
+* Fix wrong reference in ``Retry`` docstring by @PassionateBytes in #507
+* Fix retry_on_error type annotation by @armicron in #446
+* Add support for Python 3.13, remove advertised support for Python 3.8 by @Viicos in #514
+
 v0.26.3 (2025-01-06)
 ....................
 
